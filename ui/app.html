@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Clasifications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./dropzone.min.css">
+    <link rel="stylesheet" href="./app.css">
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-light justify-content-center">
+    <a class="navbar-brand" href="#">Celebrity Image Classifier</a>
+</nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="card">
+            <div class="col card-wrapper" data-player="paris_hilton">
+                <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
+                    <img src="./images/paris-hilton.jpeg" class="card-img-top w-100 h-100" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Paris-Hilton</h5>
+                    
+                </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+            <div class="col card-wrapper" data-player="Lional_messi">
+                <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
+                    <img src="./images/messi.jpeg" class="card-img-top w-100 h-100" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Lional-Messi</h5>
+
+                </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+            <div class="col card-wrapper" data-player="Marion_Cotillard">
+
+                <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
+                    <img src="./images/marion-cotilard.jpeg" class="card-img-top w-100 h-100" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Marion-Cotilard</h5>
+                    
+            </div>
+
+            </div>
+            </div>
+
+            <div class="card">
+            <div class="col card-wrapper" data-player="mbappe">
+
+                <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
+                    <img  src="./images/mbappe.jpeg" class="card-img-top w-100 h-100" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Mbappe</h5>
+                    
+                </div>
+            </div>
+
+            </div>
+
+
+            <div>
+                <div class="row">
+                    <div class="col-12 mx-auto">
+                        <form action="/file-upload" class="dropzone" id="dropzone">
+                            <div class="dz-message needsclick">
+                                <img src="./images/upload.png" width="50vw" height="50vw"><br>
+                                <span class="note needsclick">uplod image for classifications</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-3 mx-auto">
+                        <button id="submitBtn" type="button" class="btn btn-success">Classify</button>
+                    </div>
+                </div>
+            </div>
+              
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-8">
+                <div>
+                <br>
+            <h1>How I completed this ?</h1>
+            <br>
+            with the help of different knowledges resources and support I did below to make this completed
+            <br>
+            I have collected the sample Images of 4 individual class(Celebrity).
+            <br>
+            with managed filing and labeling system I cleand the data as per usefull images like images with full faces, proper 2 eyes.
+            <br>
+            In OpenCV library I have utilised the eyes and face harcascades classifier to classify the face and eyes in each images. I further made it croped to train collect the data for further processing. 
+            <br>
+            To make the image easily understandable to machine I have used the wavelet image transformation for each cropped images.
+            <br>
+                I further catagorised my class to number to name and name to number 
+
+            <br>
+            Now as its the time for reshaping, combining the coloured croped with wavelet called Vstacking and further  training combined images to make a model with the algorithms in gridsearch behaviour. And get the best result as per training and testing refrences.
+            <br>
+            from here I saved the model to pickle file and further implimented with my flask server with same attributes. Here it will take data from user, make the processing of images as before making model, and finally predict with model and gives the best result on available class and identify the class.
+            <br>
+            for hosting in web I have choosen my cloud VPS where I have maintend same environment as of production and make apache to serve the page. As it is of python here is role of wisgi for both django and flask. But flask works in api basis so a simple html page with served form apache can connect to flask.
+
+
+
+
+
+            <p> This is my Research project that I have done solely with the refrence of online materials and the youtube.
+                My teachers Mr. Redda Dehak, Louriq Fataha, Daval have given very good Guidelines and motivations for the completions of this project.
+            The algorithms and concept that they have taught me are very useful for this project. </p>
+            <br>
+            <p>This project is only for classifing the pre-trained model. Now I have only trained 4 class for my training model. With the help of Support Vector Machine Algorithm. I have implimented the gridSearch model to identify the the best outcoume form the different algortihm like SVM, Random Forest and Logistic Regression. But the value of the SVM was high so I have choosen this SVM</p>
+            </div>   
+
+            </div>  
+
+
+
+
+
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-md-6">
+                    
+                      <div class="col-md-6">
+
+                <div class="error" id="error" >
+                <p>Can't classify image. Classifier was not able to detect face and two eyes properly</p>
+                </div>
+
+                <div class="col-sm-4" id="resultHolder">
+                 </div>
+             <div class="col-sm-4" id="divClassTable">
+                <table id="classTable">
+                        <tr>
+                            <th>Person</th>
+                            <th>Probability Score</th>
+                        </tr>
+                        <tr>
+                            <td> Lional Messi</td>
+                            <td id="score_Lional_messi"></td>
+                        </tr>
+                        <tr>
+                            <td> Mbappe</td>
+                            <td id="score_mbappe"></td>
+                        </tr>
+                        <tr>
+                            <td>Marion Cotillard</td>
+                            <td id="score_Marion_Cotillard"></td>
+                        </tr>
+                        <tr>
+                            <td>Paris Hilton</td>
+                            <td id="score_paris_hilton"></td>
+                        </tr>
+
+                </table>
+                </div>
+            </div>
+
+                
+
+           
+            </div>
+
+                    
+         
+                    
+                </div>
+
+
+
+                
+
+            </div> 
+            </div>
+                         
+            
+            
+
+            
+
+
+        </div>
+
+    </div>
+</body>
+
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="./dropzone.min.js"></script>
+<script src="./app.js"></script>
+
+</html>
